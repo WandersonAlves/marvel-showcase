@@ -1,6 +1,11 @@
-import { GetCharacters } from '../../api/services/Characters';
+import {
+  setHeroesAction,
+  setIsLoadingAction,
+  setHasErrorOnLoadingAction,
+  setAddMoreHeroesAction,
+} from '../../store/heroes-list/actions';
+import { getMarvelCharacters } from '../../api/services/Characters';
 import { IReduxStore } from '../../interfaces/ReduxInterface';
-import { setHeroesAction, setIsLoadingAction, setHasErrorOnLoadingAction } from '../../store/heroes-list/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import Card from '../../components/Card';
 import FlexRow from '../../components/Blocks/FlexRow';
@@ -10,9 +15,11 @@ import styled from 'styled-components';
 
 const Container = styled(FlexRow)`
   padding: 40px;
-  overflow-x: auto;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  overflow-x: auto;
 `;
 
 const HeroesList = () => {
@@ -23,7 +30,7 @@ const HeroesList = () => {
 
   const getCharacters = async () => {
     try {
-      const { data } = await GetCharacters();
+      const { data } = await getMarvelCharacters({ offset: 0, limit: 20 });
       dispatch(setHeroesAction(data));
     } catch (e) {
       dispatch(setHasErrorOnLoadingAction(true));
@@ -33,15 +40,33 @@ const HeroesList = () => {
     }
   };
 
+  const getMoreCharacters = async (offset: number) => {
+    try {
+      const { data } = await getMarvelCharacters({ offset, limit: 20 });
+      dispatch(setAddMoreHeroesAction(data));
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   useEffect(() => {
     dispatch(setIsLoadingAction());
     getCharacters();
   }, []);
 
+  const handleScroll = (e: any) => {
+    const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+    if (bottom) {
+      getMoreCharacters(heroes.length);
+    }
+  };
+
+  const renderHeroesContainer = () => <Container onScroll={handleScroll}>{renderHeroes()}</Container>;
+
   const renderHeroes = () =>
     heroes.map(h => <Card key={h.id} picURL={`${h.thumbnail.path}.${h.thumbnail.extension}`} name={h.name} />);
 
-  return <Container>{isLoading ? <Loading /> : renderHeroes()}</Container>;
+  return isLoading ? <Loading /> : renderHeroesContainer();
 };
 
 export default HeroesList;
