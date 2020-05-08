@@ -28,7 +28,7 @@ const HeroesList = () => {
   return (
     <Container>
       {heros.map(h => (
-        <Card key={h.id} picURL={h.thumbnail.path} name={h.name} />
+        <Card key={h.id} picURL={`${h.thumbnail.path}.${h.thumbnail.extension}`} name={h.name} />
       ))}
     </Container>
   );
