@@ -1,12 +1,13 @@
-import './index.css';
 import * as serviceWorker from './serviceWorker';
-import App from './App';
+import AppShell from './features/AppShell';
+import GlobalStyle from './components/Body';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <GlobalStyle />
+    <AppShell />
   </React.StrictMode>,
   document.getElementById('root'),
 );
