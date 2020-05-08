@@ -16,10 +16,14 @@ interface ICardProps extends ICardStyledProps {
 const CardStyled = styled.div<ICardStyledProps>`
   border-radius: 10px;
   margin: 15px;
-  width: 25%;
+  width: 20%;
   height: fit-content;
+  transition: transform 0.2s;
   background-image: url(${props => props.picURL});
   background-position: center;
+  &:hover {
+    transform: scale(1.03);
+  }
 `;
 
 const CardLayer = styled(FlexColumn)`
