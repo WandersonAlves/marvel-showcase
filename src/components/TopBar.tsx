@@ -6,7 +6,6 @@ const TopBar = styled.div`
   display: flex;
   width: 100%;
   align-items: center;
-  margin-bottom: 60px;
 `;
 
 export default TopBar;

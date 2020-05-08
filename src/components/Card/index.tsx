@@ -12,7 +12,7 @@ interface ICardProps extends ICardStyledProps {
 }
 
 const CardStyled = styled.div<ICardStyledProps>`
-  border-radius: 50px;
+  border-radius: 10px;
   margin: 15px;
   width: 25%;
   height: fit-content;
@@ -26,7 +26,7 @@ const CardLayer = styled.div`
   height: 220px;
   flex-direction: column;
   justify-content: space-between;
-  border-radius: 50px;
+  border-radius: 10px;
   padding: 20px 40px;
 `;
 
