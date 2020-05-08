@@ -13,6 +13,7 @@ interface IChipProps {
 const ChipContainer = styled.div<IChipContainerProps>`
   padding: 5px;
   border-radius: 10px;
+  margin-left: 10px;
   background-color: ${props => (props.color ? props.color : 'red')};
   width: fit-content;
 `;

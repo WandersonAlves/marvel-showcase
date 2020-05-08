@@ -1,4 +1,6 @@
-import Chip from '../Chip';
+import Chip from './Chip';
+import FlexColumn from './Blocks/FlexColumn';
+import FlexRow from './Blocks/FlexRow';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -20,11 +22,9 @@ const CardStyled = styled.div<ICardStyledProps>`
   background-position: center;
 `;
 
-const CardLayer = styled.div`
+const CardLayer = styled(FlexColumn)`
   background-color: #0000008c;
-  display: flex;
   height: 220px;
-  flex-direction: column;
   justify-content: space-between;
   border-radius: 10px;
   padding: 20px 40px;
@@ -39,7 +39,10 @@ const Card = ({ picURL, name, description }: ICardProps) => {
   return (
     <CardStyled picURL={picURL}>
       <CardLayer>
-        <Chip content="hero" color="blue" />
+        <FlexRow>
+          <Chip content="hero" color="blue" />
+          <Chip content="villain" color="red" />
+        </FlexRow>
         <CardName>{name}</CardName>
       </CardLayer>
     </CardStyled>

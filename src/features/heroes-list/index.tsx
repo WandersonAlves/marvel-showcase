@@ -2,11 +2,11 @@ import { GetCharacters } from '../../api/services/Characters';
 import { GetCharactersFactory } from '../../factories/CharacterFactory';
 import { ICharacter } from '../../interfaces/CharacterInterface';
 import Card from '../../components/Card';
+import FlexRow from '../../components/Blocks/FlexRow';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const Container = styled.div`
-  display: flex;
+const Container = styled(FlexRow)`
   padding: 40px;
   overflow-x: auto;
   justify-content: center;
