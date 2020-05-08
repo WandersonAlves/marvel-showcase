@@ -23,7 +23,7 @@ const CardStyled = styled.div<ICardStyledProps>`
 `;
 
 const CardLayer = styled(FlexColumn)`
-  background-color: #0000008c;
+  background-color: #00000073;
   height: 220px;
   justify-content: space-between;
   border-radius: 10px;
