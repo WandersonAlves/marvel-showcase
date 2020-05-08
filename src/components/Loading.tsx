@@ -1,3 +1,4 @@
+import CenteredContainer from './Blocks/CenteredContainer';
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
@@ -14,6 +15,10 @@ const KeyframeAnimation = keyframes`
 		transform: perspective(136px) rotateY(180deg);
 		opacity: 0;
 	}
+`;
+
+const Container = styled(CenteredContainer)`
+  height: calc(100vh - 40px);
 `;
 
 const MainDiv = styled.div`
@@ -68,12 +73,14 @@ const InnerDiv4 = styled(InnerDiv)`
 `;
 
 const Loading = () => (
-  <MainDiv>
-    <InnerDiv />
-    <InnerDiv2 />
-    <InnerDiv4 />
-    <InnerDiv3 />
-  </MainDiv>
+  <Container>
+    <MainDiv>
+      <InnerDiv />
+      <InnerDiv2 />
+      <InnerDiv4 />
+      <InnerDiv3 />
+    </MainDiv>
+  </Container>
 );
 
 export default Loading;
