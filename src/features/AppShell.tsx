@@ -1,3 +1,4 @@
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import ContainerShell from '../components/ContainerShell';
 import HeroesList from './heroes-list';
 import React from 'react';
@@ -7,7 +8,16 @@ const AppShell = () => {
   return (
     <ContainerShell>
       <TopBar />
-      <HeroesList />
+      <BrowserRouter>
+        <Switch>
+          <Route path="/heroes">
+            <HeroesList />
+          </Route>
+          <Route path="/">
+            <HeroesList />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </ContainerShell>
   );
 };
