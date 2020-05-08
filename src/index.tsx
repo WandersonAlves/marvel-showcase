@@ -1,13 +1,17 @@
 import * as serviceWorker from './serviceWorker';
+import { Provider } from 'react-redux';
 import AppShell from './features/AppShell';
 import GlobalStyle from './components/Blocks/Body';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import store from './store';
 
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalStyle />
-    <AppShell />
+    <Provider store={store}>
+      <GlobalStyle />
+      <AppShell />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

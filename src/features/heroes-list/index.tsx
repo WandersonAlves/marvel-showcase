@@ -1,9 +1,11 @@
 import { GetCharacters } from '../../api/services/Characters';
-import { GetCharactersFactory } from '../../factories/CharacterFactory';
-import { ICharacter } from '../../interfaces/CharacterInterface';
+import { IReduxStore } from '../../interfaces/ReduxInterface';
+import { setHeroesAction, setIsLoadingAction, setHasErrorOnLoadingAction } from '../../store/heroes-list/actions';
+import { useSelector, useDispatch } from 'react-redux';
 import Card from '../../components/Card';
 import FlexRow from '../../components/Blocks/FlexRow';
-import React, { useEffect, useState } from 'react';
+import Loading from '../../components/Loading';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 const Container = styled(FlexRow)`
@@ -14,24 +16,32 @@ const Container = styled(FlexRow)`
 `;
 
 const HeroesList = () => {
-  const [heros, setHeros] = useState<ICharacter[]>([]);
+  const dispatch = useDispatch();
+  const heroes = useSelector((state: IReduxStore) => state.heroes.heroes);
+  const isLoading = useSelector((state: IReduxStore) => state.heroes.isLoading);
+  const hasErrorOnLoading = useSelector((state: IReduxStore) => state.heroes.hasErrorOnLoading);
 
   const getCharacters = async () => {
-    const { data } = await GetCharacters();
-    setHeros(GetCharactersFactory(data));
+    try {
+      const { data } = await GetCharacters();
+      dispatch(setHeroesAction(data));
+    } catch (e) {
+      dispatch(setHasErrorOnLoadingAction(true));
+      console.error(e);
+    } finally {
+      dispatch(setIsLoadingAction(false));
+    }
   };
 
   useEffect(() => {
+    dispatch(setIsLoadingAction());
     getCharacters();
   }, []);
 
-  return (
-    <Container>
-      {heros.map(h => (
-        <Card key={h.id} picURL={`${h.thumbnail.path}.${h.thumbnail.extension}`} name={h.name} />
-      ))}
-    </Container>
-  );
+  const renderHeroes = () =>
+    heroes.map(h => <Card key={h.id} picURL={`${h.thumbnail.path}.${h.thumbnail.extension}`} name={h.name} />);
+
+  return <Container>{isLoading ? <Loading /> : renderHeroes()}</Container>;
 };
 
 export default HeroesList;
