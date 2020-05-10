@@ -16,6 +16,7 @@ import Card from '../../components/Card';
 import FlexColumn from '../../components/Blocks/FlexColumn';
 import FlexRow from '../../components/Blocks/FlexRow';
 import Loading from '../../components/Loading';
+import LoadingMore from './components/LoadingMore';
 import MarvelInput from '../../components/MarvelInput';
 import NoResults from './components/NoResults';
 import React, { useEffect, useState } from 'react';
@@ -38,6 +39,7 @@ const HeroesList = () => {
   let marvelInputDebounceFn: () => void;
   const dispatch = useDispatch();
   const [lastKnowSearch, setLastKnowSearch] = useState('');
+  const [isLoadingMore, setLoadingMore] = useState(false);
   const heroes = useSelector((state: IReduxStore) => state.heroes.heroes);
   const searchedHeroes = useSelector((state: IReduxStore) => state.heroes.searchedHeroes);
   const isLoading = useSelector((state: IReduxStore) => state.heroes.isLoading);
@@ -56,6 +58,7 @@ const HeroesList = () => {
   };
 
   const getMoreCharacters = async (offset: number) => {
+    setLoadingMore(true);
     try {
       const { data } = await getMarvelCharacters({ offset, limit: 20, nameStartsWith: lastKnowSearch || undefined });
       if (lastKnowSearch) {
@@ -64,6 +67,8 @@ const HeroesList = () => {
       dispatch(setAddMoreHeroesAction(data));
     } catch (e) {
       console.error(e);
+    } finally {
+      setLoadingMore(false);
     }
   };
 
@@ -113,7 +118,10 @@ const HeroesList = () => {
         placeholder="Search for a character"
         onChange={handleMarvelInputChange}
       />
-      <HeroesContainer>{renderHeroes()}</HeroesContainer>
+      <HeroesContainer>
+        {renderHeroes()}
+        {isLoadingMore ? <LoadingMore /> : null}
+      </HeroesContainer>
     </Container>
   );
 
