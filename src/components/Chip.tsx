@@ -17,6 +17,7 @@ const ChipContainer = styled.div<IChipContainerProps>`
   margin-right: 10px;
   background-color: ${props => (props.color ? props.color : 'red')};
   width: fit-content;
+  cursor: pointer;
 `;
 
 const Span = styled.span`
