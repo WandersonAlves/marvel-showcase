@@ -30,6 +30,7 @@ const CardStyled = styled.div<ICardStyledProps>`
   transition: transform 0.2s;
   background-image: url(${props => props.picURL});
   background-position: center;
+  background-size: cover;
   &:hover {
     transform: scale(1.03);
   }
