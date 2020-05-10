@@ -11,6 +11,7 @@ interface ICardStyledProps {
 interface ICardProps extends ICardStyledProps {
   readonly name: string;
   readonly description?: string;
+  readonly onClick?: () => any;
 }
 
 const CardStyled = styled.div<ICardStyledProps>`
@@ -39,9 +40,9 @@ const CardName = styled.span`
   color: white;
 `;
 
-const Card = ({ picURL, name, description }: ICardProps) => {
+const Card = ({ picURL, name, description, onClick }: ICardProps) => {
   return (
-    <CardStyled picURL={picURL}>
+    <CardStyled picURL={picURL} onClick={onClick}>
       <CardLayer>
         <FlexRow>
           <Chip content="hero" color="blue" />
