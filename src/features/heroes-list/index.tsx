@@ -109,7 +109,7 @@ const HeroesList = () => {
         }
         setLastKnowSearch('');
         dispatch(setResetSearchAction());
-      }, 300);
+      }, 500);
     }
     marvelInputDebounceFn();
   };
@@ -122,7 +122,6 @@ const HeroesList = () => {
   const renderHeroesContainer = () => (
     <Container onScroll={handleScroll}>
       <MarvelInput
-        style={{ width: '25%', marginBottom: 20 }}
         placeholder="Search for a character"
         onChange={handleMarvelInputChange}
       />

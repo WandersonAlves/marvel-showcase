@@ -25,6 +25,11 @@ const CardStyled = styled.div<ICardStyledProps>`
   &:hover {
     transform: scale(1.03);
   }
+  @media (max-width: 768px) {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 15px;
+  }
 `;
 
 const CardLayer = styled(FlexColumn)`

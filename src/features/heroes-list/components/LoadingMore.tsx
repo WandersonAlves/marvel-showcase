@@ -34,6 +34,9 @@ const CircleMainContainer = styled.div`
   margin: auto;
   bottom: 20px;
   left: 45%;
+  @media (max-width: 768px) {
+    left: unset;
+  }
 `;
 
 const Circle1 = styled(CircleMain)`

@@ -1,9 +1,10 @@
+import { Whitish } from "../colors";
 import styled from "styled-components";
 
 const Title = styled.span`
-  font-family: 'Roboto Slab', serif;
   font-weight: 600;
-  color: white;
+  font-size: 1rem;
+  color: ${Whitish};
 `;
 
 export default Title;

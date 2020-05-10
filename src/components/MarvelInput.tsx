@@ -1,23 +1,27 @@
-import { MarvelRedColor } from '../colors';
+import { MarvelRedColor, BackgroundLighterColor, Whitish } from '../colors';
 import styled from 'styled-components';
 
 const MarvelInput = styled.input`
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 300;
+  margin-bottom: 20px;
   border-width: 2px;
-  border-color: ${MarvelRedColor};
+  border-color: transparent;
+  border-bottom-color: ${MarvelRedColor};
   border-style: solid;
   padding: 10px;
-  border-radius: 10px 15px;
-  background-color: ${MarvelRedColor};
-  color: white;
-  box-shadow: 0px 0px 8px 0px rgba(42, 42, 42, 0.36);
+  background-color: ${BackgroundLighterColor};
+  color: ${Whitish};
+  width: 50%;
   &:focus {
     outline: none;
   }
   &::placeholder {
-    color: white;
-    font-weight: 600;
+    color: ${Whitish};
+    font-weight: 300;
+  }
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;
 
