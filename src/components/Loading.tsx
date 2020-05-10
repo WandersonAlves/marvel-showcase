@@ -1,3 +1,4 @@
+import { MarvelRedColor } from '../colors';
 import CenteredContainer from './Blocks/CenteredContainer';
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
@@ -45,7 +46,7 @@ const InnerDiv = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgb(236, 29, 36);
+    background-color: ${MarvelRedColor};
     animation: ${KeyframeAnimation} 2.76s infinite linear both;
     transform-origin: 100% 100%;
   }
