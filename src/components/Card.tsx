@@ -1,3 +1,5 @@
+import { IReduxStore } from '../interfaces/ReduxInterface';
+import { useSelector } from 'react-redux';
 import Chip from './Chip';
 import FlexColumn from './Blocks/FlexColumn';
 import FlexRow from './Blocks/FlexRow';
@@ -17,7 +19,8 @@ interface ICardProps extends ICardStyledProps {
   readonly description?: string;
   readonly onClick?: () => any;
   readonly styles?: React.CSSProperties;
-  readonly showChips?: boolean;
+  readonly showVillainChip?: boolean;
+  readonly heroID?: number;
   readonly removeBackdrop?: boolean;
 }
 
@@ -59,12 +62,15 @@ const CardName = styled.span`
   color: white;
 `;
 
-const Card = ({ picURL, name, styles, onClick, showChips, removeBackdrop }: ICardProps) => {
+const Card = ({ picURL, name, styles, onClick, heroID, removeBackdrop }: ICardProps) => {
+  const char = useSelector((state: IReduxStore) => state.editedHeroes.heroes.find(h => h.id === Number(heroID)));
   return (
     <CardStyled picURL={picURL} onClick={onClick} style={styles}>
       <CardLayer removeBackdrop={removeBackdrop}>
-        <FlexRow>{/* <Chip content="hero" color="blue" />
-          <Chip content="villain" color="red" /> */}</FlexRow>
+        <FlexRow>
+          {char?.isGoodGuy ? <Chip content="hero" color="blue" /> : null}
+          {char?.isBadGuy ? <Chip content="villain" color="red" /> : null}
+        </FlexRow>
         <CardName>{name}</CardName>
       </CardLayer>
     </CardStyled>

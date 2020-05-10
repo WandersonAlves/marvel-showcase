@@ -6,8 +6,9 @@ interface IChipContainerProps {
 }
 
 interface IChipProps {
-  content: string;
-  color?: string;
+  readonly content: string;
+  readonly color?: string;
+  readonly onClick?: () => any;
 }
 
 const ChipContainer = styled.div<IChipContainerProps>`
@@ -21,10 +22,11 @@ const ChipContainer = styled.div<IChipContainerProps>`
 const Span = styled.span`
   color: white;
   font-weight: 600;
+  text-transform: uppercase;
 `;
 
-const Chip = ({ content, color }: IChipProps) => (
-  <ChipContainer color={color}>
+const Chip = ({ content, color, onClick }: IChipProps) => (
+  <ChipContainer color={color} onClick={onClick}>
     <Span>{content}</Span>
   </ChipContainer>
 );

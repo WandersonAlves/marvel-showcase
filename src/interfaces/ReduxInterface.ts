@@ -12,6 +12,20 @@ export interface IHeroesListState {
   hasErrorOnLoading: boolean;
 }
 
+export interface IEditedHeroesListState {
+  heroes: IEditedHero[];
+}
+
+export interface IEditedHero {
+  id: number;
+  isGoodGuy?: boolean;
+  isBadGuy?: boolean;
+  customDescription?: string;
+  customName?: string;
+  rating?: number;
+}
+
 export interface IReduxStore {
   heroes: IHeroesListState;
+  editedHeroes: IEditedHeroesListState;
 }

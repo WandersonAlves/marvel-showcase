@@ -140,7 +140,7 @@ const HeroesList = () => {
 
   const renderHeroes = () => {
     const renderCard = (h: ICharacter) => (
-      <Card key={h.id} picURL={`${h.thumbnail.path}.${h.thumbnail.extension}`} name={h.name} onClick={() => handleCardClick(h)} />
+      <Card key={h.id} heroID={h.id} picURL={`${h.thumbnail.path}.${h.thumbnail.extension}`} name={h.name} onClick={() => handleCardClick(h)} />
     );
     if (searchedHeroes.length) {
       return searchedHeroes.map(h => renderCard(h));

@@ -1,0 +1,2 @@
+export const SET_EDIT_HERO = 'SET_EDIT_HERO';
+export const SET_REMOVE_EDIT_HERO = 'SET_REMOVE_EDIT_HERO';
