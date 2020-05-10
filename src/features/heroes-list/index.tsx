@@ -121,6 +121,7 @@ const HeroesList = () => {
   const handleCardClick = (char: ICharacter) => {
     setSelectedHeroID(char.id);
     setAllowRedirect(true);
+    dispatch(setResetSearchAction())
   };
 
   const renderHeroesContainer = () => (
