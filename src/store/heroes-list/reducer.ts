@@ -1,5 +1,3 @@
-import { GetCharactersFactory } from '../../factories/CharacterFactory';
-import { IHeroesListState, IReduxAction } from '../../interfaces/ReduxInterface';
 import {
   SET_HEROES,
   SET_ISLOADING,
@@ -9,6 +7,8 @@ import {
   SET_RESET_SEARCH,
   SET_ADD_MORE_SEARCH_HEROES,
 } from './actionList';
+import { GetCharactersFactory } from '../../factories/CharacterFactory';
+import { IHeroesListState, IReduxAction } from '../../interfaces/ReduxInterface';
 
 const initialState: IHeroesListState = {
   heroes: [],

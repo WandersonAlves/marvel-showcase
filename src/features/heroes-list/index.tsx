@@ -17,6 +17,7 @@ import FlexColumn from '../../components/Blocks/FlexColumn';
 import FlexRow from '../../components/Blocks/FlexRow';
 import Loading from '../../components/Loading';
 import MarvelInput from '../../components/MarvelInput';
+import NoResults from './components/NoResults';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
@@ -29,6 +30,7 @@ const Container = styled(FlexColumn)`
 const HeroesContainer = styled(FlexRow)`
   justify-content: center;
   align-items: center;
+  width: 100%;
   height: 100%;
 `;
 
@@ -121,6 +123,8 @@ const HeroesList = () => {
     );
     if (searchedHeroes.length) {
       return searchedHeroes.map(h => renderCard(h));
+    } else if (!searchedHeroes.length && lastKnowSearch) {
+      return <NoResults />;
     }
     return heroes.map(h => renderCard(h));
   };
