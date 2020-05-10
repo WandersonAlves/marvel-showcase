@@ -3,12 +3,16 @@ import ContainerShell from '../components/ContainerShell';
 import HeroDetails from './hero-details';
 import HeroesList from './heroes-list';
 import React from 'react';
+import Title from '../components/Title';
 import TopBar from '../components/TopBar';
+
 
 const AppShell = () => {
   return (
     <ContainerShell>
-      <TopBar />
+      <TopBar>
+        <Title>Marvel Showcase</Title>
+      </TopBar>
       <BrowserRouter>
         <Switch>
           <Route path="/heroes" component={HeroesList} />

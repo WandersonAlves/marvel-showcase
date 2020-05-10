@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const MarvelInput = styled.input`
   font-size: 16px;
+  font-weight: 600;
   border-width: 2px;
   border-color: ${MarvelRedColor};
   border-style: solid;
@@ -16,6 +17,7 @@ const MarvelInput = styled.input`
   }
   &::placeholder {
     color: white;
+    font-weight: 600;
   }
 `;
 

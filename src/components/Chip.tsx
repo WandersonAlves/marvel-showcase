@@ -20,6 +20,7 @@ const ChipContainer = styled.div<IChipContainerProps>`
 
 const Span = styled.span`
   color: white;
+  font-weight: 600;
 `;
 
 const Chip = ({ content, color }: IChipProps) => (

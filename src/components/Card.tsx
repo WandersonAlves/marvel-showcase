@@ -36,7 +36,8 @@ const CardLayer = styled(FlexColumn)`
 `;
 
 const CardName = styled.span`
-  font-size: 18px;
+  font-size: 1rem;
+  font-weight: 600;
   color: white;
 `;
 
