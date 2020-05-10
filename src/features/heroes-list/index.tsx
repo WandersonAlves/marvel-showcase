@@ -41,6 +41,7 @@ const HeroesList = () => {
   const dispatch = useDispatch();
   const [lastKnowSearch, setLastKnowSearch] = useState('');
   const [isLoadingMore, setLoadingMore] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
   const [allowRedirect, setAllowRedirect] = useState(false);
   const [selectedHeroID, setSelectedHeroID] = useState(0);
   const heroes = useSelector((state: IReduxStore) => state.heroes.heroes);
@@ -79,6 +80,7 @@ const HeroesList = () => {
     try {
       const { data } = await getMarvelCharacters({ nameStartsWith: text });
       dispatch(setSearchHeroesAction(data));
+      setIsSearching(false);
     } catch (e) {
       console.error(e);
     }
@@ -102,12 +104,14 @@ const HeroesList = () => {
       marvelInputDebounceFn = debounce(() => {
         // @ts-ignore
         const value = e.target.value;
+        setIsSearching(true);
         if (value) {
           setLastKnowSearch(value);
           getSearchCharacters(value);
           return;
         }
         setLastKnowSearch('');
+        setIsSearching(false);
         dispatch(setResetSearchAction());
       }, 500);
     }
@@ -121,14 +125,15 @@ const HeroesList = () => {
 
   const renderHeroesContainer = () => (
     <Container onScroll={handleScroll}>
-      <MarvelInput
-        placeholder="Search for a character"
-        onChange={handleMarvelInputChange}
-      />
-      <HeroesContainer>
-        {renderHeroes()}
-        {isLoadingMore ? <LoadingMore /> : null}
-      </HeroesContainer>
+      <MarvelInput placeholder="Search for a character" onChange={handleMarvelInputChange} />
+      {isSearching ? (
+        <Loading />
+      ) : (
+        <HeroesContainer>
+          {renderHeroes()}
+          {isLoadingMore ? <LoadingMore /> : null}
+        </HeroesContainer>
+      )}
     </Container>
   );
 
