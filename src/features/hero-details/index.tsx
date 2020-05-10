@@ -12,6 +12,7 @@ import HeroDetailsContainer from './components/HeroDetailsContainer';
 import HeroImageContainer from './components/HeroImageContainer';
 import Loading from '../../components/Loading';
 import React, { FunctionComponent, useEffect, useState } from 'react';
+import Separator from './components/Separator';
 
 interface HeroDetailsProps {
   heroID: string;
@@ -58,6 +59,7 @@ const HeroDetails: FunctionComponent<HeroDetailsProps> = () => {
           <DetailsGroup title="events" value={currentChar.events.available}/>
           <DetailsGroup title="stories" value={currentChar.stories.available}/>
         </FlexRow>
+        <Separator />
         <span style={{ fontWeight: 600 }}>{currentChar.description}</span>
       </FlexColumn>
     </FlexRow>
