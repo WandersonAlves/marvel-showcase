@@ -15,6 +15,11 @@ const MarvelButton = styled.button`
   border-style: solid;
   background-color: grey;
   color: white;
+
+  @media (max-width: 768px) {
+    margin: 0 !important;
+    margin-bottom: 20px !important;
+  }
 `;
 
 export default MarvelButton;

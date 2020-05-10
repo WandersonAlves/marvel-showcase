@@ -8,6 +8,10 @@ export const DetailLabel = styled.span`
   color: ${Transparentish}
   font-weight: 600;
   text-transform: uppercase;
+
+  @media (max-width: 768px) {
+    flex: unset;
+  }
 `;
 
 export default DetailLabel;

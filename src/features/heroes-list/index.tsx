@@ -126,7 +126,9 @@ const HeroesList = () => {
 
   const renderHeroesContainer = () => (
     <Container onScroll={handleScroll}>
-      <MarvelInput placeholder="Search for a character" onChange={handleMarvelInputChange} />
+      <FlexRow style={{ width: '100%'}}>
+        <MarvelInput placeholder="Search for a character" onChange={handleMarvelInputChange} />
+      </FlexRow>
       {isSearching ? (
         <Loading />
       ) : (

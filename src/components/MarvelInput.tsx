@@ -12,16 +12,12 @@ const MarvelInput = styled.input`
   padding: 10px;
   background-color: ${BackgroundLighterColor};
   color: ${Whitish};
-  width: 50%;
   &:focus {
     outline: none;
   }
   &::placeholder {
     color: ${Transparentish};
     font-weight: 600;
-  }
-  @media (max-width: 768px) {
-    width: 100%;
   }
 `;
 
