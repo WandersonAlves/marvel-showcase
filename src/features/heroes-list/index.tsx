@@ -36,6 +36,12 @@ const HeroesContainer = styled(FlexRow)`
   height: 100%;
 `;
 
+const InputContainer = styled(FlexRow)`
+  @media (max-width: 768px) {
+    width: 100%
+  }
+`;
+
 const HeroesList = () => {
   let marvelInputDebounceFn: () => void;
   const dispatch = useDispatch();
@@ -126,9 +132,9 @@ const HeroesList = () => {
 
   const renderHeroesContainer = () => (
     <Container onScroll={handleScroll}>
-      <FlexRow style={{ width: '100%'}}>
+      <InputContainer>
         <MarvelInput placeholder="Search for a character" onChange={handleMarvelInputChange} />
-      </FlexRow>
+      </InputContainer>
       {isSearching ? (
         <Loading />
       ) : (
