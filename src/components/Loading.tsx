@@ -1,3 +1,6 @@
+/**
+ * Credits to https://icons8.com/cssload/
+ */
 import { MarvelRedColor } from '../colors';
 import CenteredContainer from './Blocks/CenteredContainer';
 import React from 'react';
