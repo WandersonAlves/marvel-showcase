@@ -94,6 +94,18 @@ const HeroDetails: FunctionComponent<HeroDetailsProps> = () => {
     return '';
   }
 
+  const renderHeroDescription = () => {
+    if (currentChar.description) {
+      return (
+        <>
+          <Separator />
+          <span style={{ fontWeight: 600 }}>{currentChar.description}</span>
+        </>
+      );
+    }
+    return null;
+  }
+
   const renderHeroDetail = () => (
     <FlexRow style={{ flexWrap: 'unset' }}>
       <FlexColumn style={{ width: '25%' }}>
@@ -111,8 +123,7 @@ const HeroDetails: FunctionComponent<HeroDetailsProps> = () => {
           <DetailsGroup title="events" value={currentChar.events.available} />
           <DetailsGroup title="stories" value={currentChar.stories.available} />
         </FlexRow>
-        <Separator />
-        <span style={{ fontWeight: 600 }}>{currentChar.description}</span>
+        {renderHeroDescription()}
       </FlexColumn>
     </FlexRow>
   );
