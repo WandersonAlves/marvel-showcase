@@ -2,17 +2,20 @@ import { GetCharactersFactory, GetNullableCharacterFactory } from '../../factori
 import { getMarvelCharacter } from '../../api/services/Characters';
 import { ICharacter } from '../../interfaces/CharacterInterface';
 import { IReduxStore, IEditedHero } from '../../interfaces/ReduxInterface';
-import { setEditHeroAction } from '../../store/hero-detail/actions';
+import { setEditHeroAction, setRemoveEditHeroAction } from '../../store/hero-detail/actions';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Card from '../../components/Card';
 import Chip from '../../components/Chip';
+import DetailLabel from './components/DetailLabel';
 import DetailsGroup from './components/DetailsGroup';
 import FlexColumn from '../../components/Blocks/FlexColumn';
 import FlexRow from '../../components/Blocks/FlexRow';
 import HeroDetailsContainer from './components/HeroDetailsContainer';
 import HeroImageContainer from './components/HeroImageContainer';
 import Loading from '../../components/Loading';
+import MarvelButton from '../../components/MarvelButton';
+import MarvelInput from '../../components/MarvelInput';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import Separator from './components/Separator';
 
@@ -25,6 +28,8 @@ const HeroDetails: FunctionComponent<HeroDetailsProps> = () => {
   const { heroID } = useParams<HeroDetailsProps>();
   const [isLoading, setLoading] = useState(true);
   const [charImage, setCharImage] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
+  const [descriptionEdit, setDescriptionEdit] = useState('');
   const [currentChar, setCurrentChar] = useState<ICharacter>(GetNullableCharacterFactory());
   const characterFromStore = useSelector((state: IReduxStore) => state.heroes.heroes.find(h => h.id === Number(heroID)));
   const editedChar = useSelector((state: IReduxStore) => state.editedHeroes.heroes.find(h => h.id === Number(heroID)));
@@ -87,36 +92,69 @@ const HeroDetails: FunctionComponent<HeroDetailsProps> = () => {
   const renderHeroType = () => {
     if (editedChar?.isBadGuy) {
       return '(Villain)';
-    }
-    else if (editedChar?.isGoodGuy) {
+    } else if (editedChar?.isGoodGuy) {
       return '(Hero)';
     }
     return '';
-  }
+  };
 
   const renderHeroDescription = () => {
-    if (currentChar.description) {
+    if (currentChar.description || editedChar?.customDescription) {
       return (
         <>
           <Separator />
-          <span style={{ fontWeight: 600 }}>{currentChar.description}</span>
+          <span style={{ fontWeight: 600 }}>{editedChar?.customDescription || currentChar.description}</span>
         </>
       );
     }
     return null;
+  };
+
+  const resetEdit = () => {
+    if (editedChar) {
+      setDescriptionEdit('');
+      dispatch(setRemoveEditHeroAction(Number(heroID)));
+    }
   }
 
-  const renderHeroDetail = () => (
-    <FlexRow style={{ flexWrap: 'unset' }}>
-      <FlexColumn style={{ width: '25%' }}>
-        <Card picURL={charImage} styles={{ width: '100%', height: 450, margin: '25px 0' }} removeBackdrop />
-        <FlexRow>
+  const renderHeroForm = () => {
+    const handleHeroDescriptionChange = (text: string) => {
+      if (editedChar) {
+        setDescriptionEdit(text);
+        dispatch(setEditHeroAction({...editedChar, customDescription: text }));
+      }
+    };
+    return (
+      <>
+        <Separator />
+        <FlexRow style={{ marginBottom: 20, alignItems: 'center' }}>
+          <DetailLabel>This char is a: </DetailLabel>
           <Chip content="villain" color="red" onClick={() => handleChipChange('villain')} />
           <Chip content="hero" color="blue" onClick={() => handleChipChange('hero')} />
         </FlexRow>
+        <MarvelInput
+          placeholder="Set a custom description, erase to reset"
+          value={descriptionEdit}
+          onChange={e => handleHeroDescriptionChange(e.target.value)}
+        />
+      </>
+    );
+  };
+
+  const renderHeroDetail = () => (
+    <FlexRow style={{ flexWrap: 'unset' }}>
+      <FlexColumn style={{ width: '18%' }}>
+        <Card picURL={charImage} styles={{ width: '100%', height: 450, margin: '25px 0' }} removeBackdrop />
+        <Separator />
+        <FlexRow>
+          <MarvelButton onClick={() => setIsEditing(!isEditing)} style={{ marginRight: 20 }}>edit</MarvelButton>
+          <MarvelButton onClick={resetEdit}>reset</MarvelButton>
+        </FlexRow>
       </FlexColumn>
-      <FlexColumn style={{ marginLeft: 80 }}>
-        <h1>{currentChar.name} {renderHeroType()}</h1>
+      <FlexColumn style={{ marginLeft: 80, width: '80%' }}>
+        <h1>
+          {currentChar.name} {renderHeroType()}
+        </h1>
         <FlexRow style={{ marginBottom: 25 }}>
           <DetailsGroup title="series" value={currentChar.series.available} />
           <DetailsGroup title="comics" value={currentChar.comics.available} />
@@ -124,6 +162,7 @@ const HeroDetails: FunctionComponent<HeroDetailsProps> = () => {
           <DetailsGroup title="stories" value={currentChar.stories.available} />
         </FlexRow>
         {renderHeroDescription()}
+        {isEditing ? renderHeroForm() : null}
       </FlexColumn>
     </FlexRow>
   );
