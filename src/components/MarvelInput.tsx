@@ -1,9 +1,9 @@
-import { MarvelRedColor, BackgroundLighterColor, Whitish } from '../colors';
+import { MarvelRedColor, BackgroundLighterColor, Whitish, Transparentish } from '../colors';
 import styled from 'styled-components';
 
 const MarvelInput = styled.input`
   font-size: 1rem;
-  font-weight: 300;
+  font-weight: 600;
   margin-bottom: 20px;
   border-width: 2px;
   border-color: transparent;
@@ -17,8 +17,8 @@ const MarvelInput = styled.input`
     outline: none;
   }
   &::placeholder {
-    color: ${Whitish};
-    font-weight: 300;
+    color: ${Transparentish};
+    font-weight: 600;
   }
   @media (max-width: 768px) {
     width: 100%;
