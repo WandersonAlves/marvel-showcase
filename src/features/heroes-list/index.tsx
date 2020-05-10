@@ -11,6 +11,7 @@ import { debounce } from 'lodash';
 import { getMarvelCharacters } from '../../api/services/Characters';
 import { ICharacter } from '../../interfaces/CharacterInterface';
 import { IReduxStore } from '../../interfaces/ReduxInterface';
+import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Card from '../../components/Card';
 import FlexColumn from '../../components/Blocks/FlexColumn';
@@ -40,6 +41,8 @@ const HeroesList = () => {
   const dispatch = useDispatch();
   const [lastKnowSearch, setLastKnowSearch] = useState('');
   const [isLoadingMore, setLoadingMore] = useState(false);
+  const [allowRedirect, setAllowRedirect] = useState(false);
+  const [selectedHeroID, setSelectedHeroID] = useState(0);
   const heroes = useSelector((state: IReduxStore) => state.heroes.heroes);
   const searchedHeroes = useSelector((state: IReduxStore) => state.heroes.searchedHeroes);
   const isLoading = useSelector((state: IReduxStore) => state.heroes.isLoading);
@@ -111,6 +114,11 @@ const HeroesList = () => {
     marvelInputDebounceFn();
   };
 
+  const handleCardClick = (char: ICharacter) => {
+    setSelectedHeroID(char.id);
+    setAllowRedirect(true);
+  };
+
   const renderHeroesContainer = () => (
     <Container onScroll={handleScroll}>
       <MarvelInput
@@ -127,7 +135,7 @@ const HeroesList = () => {
 
   const renderHeroes = () => {
     const renderCard = (h: ICharacter) => (
-      <Card key={h.id} picURL={`${h.thumbnail.path}.${h.thumbnail.extension}`} name={h.name} />
+      <Card key={h.id} picURL={`${h.thumbnail.path}.${h.thumbnail.extension}`} name={h.name} onClick={() => handleCardClick(h)} />
     );
     if (searchedHeroes.length) {
       return searchedHeroes.map(h => renderCard(h));
@@ -137,7 +145,10 @@ const HeroesList = () => {
     return heroes.map(h => renderCard(h));
   };
 
-  return isLoading ? <Loading /> : renderHeroesContainer();
+  const renderHeroesOrRedirect = () =>
+    selectedHeroID && allowRedirect ? <Redirect to={`/hero-details/${selectedHeroID}`} /> : renderHeroesContainer();
+
+  return isLoading ? <Loading /> : renderHeroesOrRedirect();
 };
 
 export default HeroesList;

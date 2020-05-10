@@ -1,5 +1,6 @@
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import ContainerShell from '../components/ContainerShell';
+import HeroDetails from './hero-details';
 import HeroesList from './heroes-list';
 import React from 'react';
 import TopBar from '../components/TopBar';
@@ -10,12 +11,9 @@ const AppShell = () => {
       <TopBar />
       <BrowserRouter>
         <Switch>
-          <Route path="/heroes">
-            <HeroesList />
-          </Route>
-          <Route path="/">
-            <HeroesList />
-          </Route>
+          <Route path="/heroes" component={HeroesList} />
+          <Route path="/hero-details/:heroID" component={HeroDetails} />
+          <Route path="/" component={HeroesList} />
         </Switch>
       </BrowserRouter>
     </ContainerShell>
