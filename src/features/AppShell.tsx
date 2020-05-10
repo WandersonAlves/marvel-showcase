@@ -14,8 +14,10 @@ const AppShell = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const savedEditedHeroes = JSON.parse(localStorage.getItem('edited-heroes') || '"heroes": []');
-    dispatch(setBatchEditHeroAction(savedEditedHeroes.heroes));
+    const savedEditedHeroes = localStorage.getItem('edited-heroes');
+    if (savedEditedHeroes) {
+      dispatch(setBatchEditHeroAction(JSON.parse(savedEditedHeroes).heroes));
+    }
   }, [])
 
   return (
