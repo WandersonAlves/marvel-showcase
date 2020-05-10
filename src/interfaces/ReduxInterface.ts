@@ -7,6 +7,7 @@ export interface IReduxAction {
 
 export interface IHeroesListState {
   heroes: ICharacter[];
+  searchedHeroes: ICharacter[];
   isLoading: boolean;
   hasErrorOnLoading: boolean;
 }
