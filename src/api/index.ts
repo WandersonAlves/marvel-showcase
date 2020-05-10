@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'https://gateway.marvel.com:443',
+  baseURL: 'https://gateway.marvel.com:443/v1/public',
 });
 
 API.interceptors.request.use(request => {
