@@ -18,9 +18,9 @@ const KeyframeAnimation = keyframes`
 const CircleMain = styled.div`
   background-color: ${MarvelRedColor};
   float: left;
-  height: 31px;
+  height: 25px;
   margin-left: 17px;
-  width: 31px;
+  width: 25px;
   animation-name: ${KeyframeAnimation};
   animation-duration: 1.0675s;
   animation-iteration-count: infinite;
