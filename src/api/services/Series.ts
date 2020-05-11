@@ -1,5 +1,10 @@
-import { IAPIResponse } from "../../interfaces/CommonInterface";
-import { ISerie } from "../../interfaces/SerieInterface";
-import API from "..";
+import { IAPIResponse } from '../../interfaces/CommonInterface';
+import { ISerie } from '../../interfaces/SerieInterface';
+import API from '..';
 
-export const getCharacterSeries = (charID: number) => API.get<IAPIResponse<ISerie>>(`/characters/${charID}/series`);
+interface IGetCharactersSeriesParams {
+  offset: number;
+  limit: number;
+}
+export const getCharacterSeries = (charID: number, params: IGetCharactersSeriesParams) =>
+  API.get<IAPIResponse<ISerie>>(`/characters/${charID}/series`, { params });

@@ -3,7 +3,7 @@ import { IThumbnail, IUrl } from './CommonInterface';
 // Don't expose all members from Marvel API since we don't use them
 export interface ISerie {
   id: number;
-  title: number;
+  title: string;
   description: number;
   resourceURI: number;
   urls: IUrl[];

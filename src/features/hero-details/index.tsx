@@ -13,6 +13,7 @@ import FlexColumn from '../../components/Blocks/FlexColumn';
 import FlexRow from '../../components/Blocks/FlexRow';
 import HeroDetailsContainer from './components/HeroDetailsContainer';
 import HeroImageContainer from './components/HeroImageContainer';
+import HeroSeriesList from './components/HeroSeriesList';
 import Loading from '../../components/Loading';
 import MarvelButton from '../../components/MarvelButton';
 import MarvelInput from '../../components/MarvelInput';
@@ -194,6 +195,7 @@ const HeroDetails: FunctionComponent<HeroDetailsProps> = () => {
     <HeroDetailsContainer>
       <HeroImageContainer picURL={charImage} />
       {isLoading ? <Loading /> : renderHeroDetail()}
+      <HeroSeriesList heroID={heroID}/>
     </HeroDetailsContainer>
   );
 };
