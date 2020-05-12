@@ -1,4 +1,4 @@
-import { MarvelRedColor, BackgroundLighterColor, Whitish } from "../colors";
+import { MarvelRedColor, BackgroundLighterColor, Whitish, BackgroundColor } from "../colors";
 import styled from "styled-components";
 
 const MarvelButton = styled.button`
@@ -15,6 +15,10 @@ const MarvelButton = styled.button`
   border-style: solid;
   background-color: grey;
   color: white;
+
+  &:disabled {
+    border-bottom-color: ${BackgroundColor};
+  }
 
   @media (max-width: 768px) {
     margin: 0 !important;
