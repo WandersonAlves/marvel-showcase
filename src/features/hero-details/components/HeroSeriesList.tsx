@@ -1,6 +1,8 @@
 import { getCharacterSeries } from '../../../api/services/Series';
 import { GetSeriesFactory } from '../../../factories/SeriesFactory';
+import { IReduxStore } from '../../../interfaces/ReduxInterface';
 import { ISerie } from '../../../interfaces/SerieInterface';
+import { useSelector } from 'react-redux';
 import Card from '../../../components/Card';
 import FlexColumn from '../../../components/Blocks/FlexColumn';
 import FlexRow from '../../../components/Blocks/FlexRow';
@@ -15,6 +17,7 @@ interface IHeroSeriesListProps {
 const HeroSeriesList = ({ heroID }: IHeroSeriesListProps) => {
   const [seriesList, setSeriesList] = useState<ISerie[]>([]);
   const [isLoadingMore, setLoadingMore] = useState(false);
+  const loadMore = useSelector((state: IReduxStore) => state.editedHeroes.timesLoadedMore);
 
   const serieImage = (s: ISerie): string => `${s.thumbnail.path}.${s.thumbnail.extension}`;
 
@@ -37,9 +40,7 @@ const HeroSeriesList = ({ heroID }: IHeroSeriesListProps) => {
     fetchCharacterSeries(seriesList.length);
   };
 
-  useEffect(() => {
-    fetchCharacterSeries();
-  }, []);
+  useEffect(() => handleScrollFromParent(), [loadMore]);
 
   const renderSeriesList = () => (
     <FlexRow alignItems justifyItems>

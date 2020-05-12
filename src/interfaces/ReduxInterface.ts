@@ -14,6 +14,7 @@ export interface IHeroesListState {
 
 export interface IEditedHeroesListState {
   heroes: IEditedHero[];
+  timesLoadedMore: number;
 }
 
 export interface IEditedHero {

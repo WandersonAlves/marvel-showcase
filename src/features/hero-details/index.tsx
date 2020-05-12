@@ -1,4 +1,4 @@
-import { editHeroAction } from '../../store/hero-detail/actions';
+import { editHeroAction, loadMoreSeriesAction } from '../../store/hero-detail/actions';
 import { GetCharactersFactory, GetNullableCharacterFactory } from '../../factories/CharacterFactory';
 import { getMarvelCharacter } from '../../api/services/Characters';
 import { ICharacter } from '../../interfaces/CharacterInterface';
@@ -60,8 +60,16 @@ const HeroDetails: FunctionComponent<HeroDetailsProps> = () => {
     }
   }, []);
 
+  const handleScroll = (e: any) => {
+    const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+    if (bottom) {
+      console.log('Hi from bottom')
+      dispatch(loadMoreSeriesAction());
+    }
+  };
+
   return (
-    <HeroDetailsContainer>
+    <HeroDetailsContainer onScroll={handleScroll}>
       <HeroImageContainer picURL={charImage} />
       {isLoading ? (
         <Loading />

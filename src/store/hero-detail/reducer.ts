@@ -1,8 +1,9 @@
 import { IEditedHeroesListState, IReduxAction } from "../../interfaces/ReduxInterface";
-import { SET_EDIT_HERO, SET_BATCH_EDIT_HERO, SET_REMOVE_EDIT_HERO } from "./actionList";
+import { SET_EDIT_HERO, SET_BATCH_EDIT_HERO, SET_REMOVE_EDIT_HERO, SET_LOAD_MORE_SERIES } from "./actionList";
 
 const initialState: IEditedHeroesListState = {
-  heroes: []
+  heroes: [],
+  timesLoadedMore: 0
 };
 
 const editedHeroesReducer = (state = initialState, action: IReduxAction) => {
@@ -22,6 +23,12 @@ const editedHeroesReducer = (state = initialState, action: IReduxAction) => {
       return {
         ...state,
         heroes: newHeroes
+      }
+    }
+    case SET_LOAD_MORE_SERIES: {
+      return {
+        ...state,
+        timesLoadedMore: state.timesLoadedMore + 1
       }
     }
     case SET_BATCH_EDIT_HERO: {
