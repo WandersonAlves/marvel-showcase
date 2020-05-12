@@ -38,7 +38,7 @@ const HeroesContainer = styled(FlexRow)`
 
 const InputContainer = styled(FlexRow)`
   @media (max-width: 768px) {
-    width: 100%
+    width: 100%;
   }
 `;
 
@@ -46,6 +46,7 @@ const HeroesList = () => {
   let marvelInputDebounceFn: () => void;
   const dispatch = useDispatch();
   const history = useHistory();
+  const [marvelInputValue, setMarvelInputValue] = useState('');
   const [lastKnowSearch, setLastKnowSearch] = useState('');
   const [isLoadingMore, setLoadingMore] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
@@ -105,6 +106,8 @@ const HeroesList = () => {
 
   const handleMarvelInputChange = (e: React.ChangeEvent) => {
     e.persist();
+    // @ts-ignore
+    setMarvelInputValue(e.target.value);
     if (!marvelInputDebounceFn) {
       marvelInputDebounceFn = debounce(() => {
         // @ts-ignore
@@ -129,9 +132,14 @@ const HeroesList = () => {
   };
 
   const renderHeroesContainer = () => (
-    <Container onScroll={handleScroll}>
+    <Container onScroll={handleScroll} data-testid="hero-list-container">
       <InputContainer>
-        <MarvelInput placeholder="Search for a character" onChange={handleMarvelInputChange} />
+        <MarvelInput
+          data-testid="marvel-input"
+          placeholder="Search for a character"
+          onChange={handleMarvelInputChange}
+          value={marvelInputValue}
+        />
       </InputContainer>
       {isSearching ? (
         <Loading />
@@ -146,7 +154,13 @@ const HeroesList = () => {
 
   const renderHeroes = () => {
     const renderCard = (h: ICharacter) => (
-      <Card key={h.id} heroID={h.id} picURL={`${h.thumbnail.path}.${h.thumbnail.extension}`} name={h.name} onClick={() => handleCardClick(h)} />
+      <Card
+        key={h.id}
+        heroID={h.id}
+        picURL={`${h.thumbnail.path}.${h.thumbnail.extension}`}
+        name={h.name}
+        onClick={() => handleCardClick(h)}
+      />
     );
     if (searchedHeroes.length) {
       return searchedHeroes.map(h => renderCard(h));
