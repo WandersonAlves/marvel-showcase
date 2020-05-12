@@ -6,7 +6,7 @@ const API = axios.create({
 
 API.interceptors.request.use(request => {
   request.params = request.params ? request.params : {};
-  request.params.apikey = '8fdee667c960c83cbe427ba898d269f5';
+  request.params.apikey = process.env.REACT_APP_MARVEL_KEY;
   return request;
 });
 
