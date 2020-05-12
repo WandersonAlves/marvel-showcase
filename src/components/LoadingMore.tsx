@@ -1,7 +1,7 @@
 /**
  * Credits to https://icons8.com/cssload/
  */
-import { MarvelRedColor } from '../../../colors';
+import { MarvelRedColor } from '../colors';
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 

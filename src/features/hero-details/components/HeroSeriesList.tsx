@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import Card from '../../../components/Card';
 import FlexColumn from '../../../components/Blocks/FlexColumn';
 import FlexRow from '../../../components/Blocks/FlexRow';
-import LoadingMore from '../../heroes-list/components/LoadingMore';
+import LoadingMore from '../../../components/LoadingMore';
 import React, { useState, useEffect } from 'react';
 import Separator from './Separator';
 

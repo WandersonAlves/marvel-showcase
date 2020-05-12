@@ -17,7 +17,7 @@ import Card from '../../components/Card';
 import FlexColumn from '../../components/Blocks/FlexColumn';
 import FlexRow from '../../components/Blocks/FlexRow';
 import Loading from '../../components/Loading';
-import LoadingMore from './components/LoadingMore';
+import LoadingMore from '../../components/LoadingMore';
 import MarvelInput from '../../components/MarvelInput';
 import NoResults from './components/NoResults';
 import React, { useEffect, useState } from 'react';
