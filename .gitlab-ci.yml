@@ -1,0 +1,29 @@
+stages:
+  - build
+  - test
+  - deploy
+build:
+  stage: build
+  tags:
+    - ci-token
+  script:
+    - yarn install
+    - yarn build
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - build
+test:
+  stage: test
+  tags:
+    - ci-token
+  script:
+    - yarn test
+deploy:
+  stage: deploy
+  tags:
+    - ci-token
+  script:
+    - surge build
+  only:
+    - master
