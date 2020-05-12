@@ -11,7 +11,7 @@ import { debounce } from 'lodash';
 import { getMarvelCharacters } from '../../api/services/Characters';
 import { ICharacter } from '../../interfaces/CharacterInterface';
 import { IReduxStore } from '../../interfaces/ReduxInterface';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Card from '../../components/Card';
 import FlexColumn from '../../components/Blocks/FlexColumn';
@@ -45,11 +45,10 @@ const InputContainer = styled(FlexRow)`
 const HeroesList = () => {
   let marvelInputDebounceFn: () => void;
   const dispatch = useDispatch();
+  const history = useHistory();
   const [lastKnowSearch, setLastKnowSearch] = useState('');
   const [isLoadingMore, setLoadingMore] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
-  const [allowRedirect, setAllowRedirect] = useState(false);
-  const [selectedHeroID, setSelectedHeroID] = useState(0);
   const heroes = useSelector((state: IReduxStore) => state.heroes.heroes);
   const searchedHeroes = useSelector((state: IReduxStore) => state.heroes.searchedHeroes);
   const isLoading = useSelector((state: IReduxStore) => state.heroes.isLoading);
@@ -125,9 +124,8 @@ const HeroesList = () => {
   };
 
   const handleCardClick = (char: ICharacter) => {
-    setSelectedHeroID(char.id);
-    setAllowRedirect(true);
-    dispatch(resetSearchAction())
+    dispatch(resetSearchAction());
+    history.push(`/hero-details/${char.id}`);
   };
 
   const renderHeroesContainer = () => (
@@ -158,10 +156,7 @@ const HeroesList = () => {
     return heroes.map(h => renderCard(h));
   };
 
-  const renderHeroesOrRedirect = () =>
-    selectedHeroID && allowRedirect ? <Redirect to={`/hero-details/${selectedHeroID}`} /> : renderHeroesContainer();
-
-  return isLoading ? <Loading /> : renderHeroesOrRedirect();
+  return isLoading ? <Loading /> : renderHeroesContainer();
 };
 
 export default HeroesList;
