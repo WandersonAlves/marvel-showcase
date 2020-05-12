@@ -77,7 +77,7 @@ const HeroDetails: FunctionComponent<HeroDetailsProps> = () => {
   };
 
   return (
-    <HeroDetailsContainer onScroll={handleScroll}>
+    <HeroDetailsContainer onScroll={handleScroll} data-testid={`hero-details-${heroID}`}>
       <HeroImageContainer picURL={charImage} />
       {isLoading ? (
         <Loading />

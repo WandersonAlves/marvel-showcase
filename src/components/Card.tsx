@@ -65,7 +65,7 @@ const CardName = styled.span`
 const Card = ({ picURL, name, styles, onClick, heroID, removeBackdrop }: ICardProps) => {
   const char = useSelector((state: IReduxStore) => state.editedHeroes.heroes.find(h => h.id === Number(heroID)));
   return (
-    <CardStyled picURL={picURL} onClick={onClick} style={styles}>
+    <CardStyled picURL={picURL} onClick={onClick} style={styles} data-testid={`char-${heroID}`}>
       <CardLayer removeBackdrop={removeBackdrop}>
         <FlexRow>
           {char?.isGoodGuy ? <Chip content="hero" color="blue" /> : null}
