@@ -1,5 +1,5 @@
-import DetailLabel from "./DetailLabel";
-import FlexRow from "../../../components/Blocks/FlexRow";
+import DetailLabel from './DetailLabel';
+import FlexRow from '../../../components/Blocks/FlexRow';
 import React from 'react';
 
 interface IDetailsGroupProps {
@@ -7,10 +7,10 @@ interface IDetailsGroupProps {
   readonly value: any;
 }
 
-const DetailsGroup = ({title, value}: IDetailsGroupProps) => (
-  <FlexRow style={{width: '100%', lineHeight: '40px'}}>
+const DetailsGroup = ({ title, value }: IDetailsGroupProps) => (
+  <FlexRow disableMobileColumn style={{ width: '100%', lineHeight: '40px', alignItems: 'baseline' }}>
     <DetailLabel>{title}</DetailLabel>
-    <span style={{fontWeight: 600}}>{value}</span>
+    <span style={{ fontWeight: 600 }}>{value}</span>
   </FlexRow>
 );
 

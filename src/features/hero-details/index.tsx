@@ -6,11 +6,19 @@ import { IReduxStore } from '../../interfaces/ReduxInterface';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import HeroDetail from './components/HeroDetail';
-import HeroDetailsContainer from './components/HeroDetailsContainer';
 import HeroImageContainer from './components/HeroImageContainer';
 import HeroSeriesList from './components/HeroSeriesList';
 import Loading from '../../components/Loading';
 import React, { FunctionComponent, useEffect, useState } from 'react';
+import styled from 'styled-components';
+
+
+const HeroDetailsContainer = styled.div`
+  height: 100vh;
+  padding: 40px;
+  align-items: center;
+  overflow-x: auto;
+`;
 
 interface HeroDetailsProps {
   heroID: string;
