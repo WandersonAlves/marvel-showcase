@@ -1,5 +1,5 @@
+import { editHeroAction } from '../../../store/hero-detail/actions';
 import { IEditedHero } from '../../../interfaces/ReduxInterface';
-import { setEditHeroAction } from '../../../store/hero-detail/actions';
 import { useDispatch } from 'react-redux';
 import Chip from '../../../components/Chip';
 import DetailLabel from './DetailLabel';
@@ -24,7 +24,7 @@ const HeroForm = ({ editedChar, heroID }: IHeroFormProps) => {
 
   const handleHeroDescriptionChange = (text: string) => {
     setDescriptionEdit(text);
-    dispatch(setEditHeroAction({ ...editedChar, customDescription: text }));
+    dispatch(editHeroAction({ ...editedChar, customDescription: text }));
   };
 
   const handleChipChange = (value: 'villain' | 'hero') => {
@@ -32,11 +32,11 @@ const HeroForm = ({ editedChar, heroID }: IHeroFormProps) => {
       const copy: IEditedHero = { ...editedChar };
       copy.isBadGuy = value === 'villain' ? true : false;
       copy.isGoodGuy = value === 'villain' ? false : true;
-      dispatch(setEditHeroAction(copy));
+      dispatch(editHeroAction(copy));
       return;
     }
     dispatch(
-      setEditHeroAction({
+      editHeroAction({
         id: heroID,
         customDescription: '',
         customName: '',

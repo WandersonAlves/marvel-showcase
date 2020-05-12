@@ -2,10 +2,10 @@ import {
   setHeroesAction,
   setIsLoadingAction,
   setHasErrorOnLoadingAction,
-  setAddMoreHeroesAction,
+  addMoreHeroesAction,
   setSearchHeroesAction,
-  setResetSearchAction,
-  setAddMoreSearchHeroesAction,
+  resetSearchAction,
+  addMoreSearchHeroesAction,
 } from '../../store/heroes-list/actions';
 import { debounce } from 'lodash';
 import { getMarvelCharacters } from '../../api/services/Characters';
@@ -72,9 +72,9 @@ const HeroesList = () => {
     try {
       const { data } = await getMarvelCharacters({ offset, limit: 20, nameStartsWith: lastKnowSearch || undefined });
       if (lastKnowSearch) {
-        return dispatch(setAddMoreSearchHeroesAction(data));
+        return dispatch(addMoreSearchHeroesAction(data));
       }
-      dispatch(setAddMoreHeroesAction(data));
+      dispatch(addMoreHeroesAction(data));
     } catch (e) {
       console.error(e);
     } finally {
@@ -118,7 +118,7 @@ const HeroesList = () => {
         }
         setLastKnowSearch('');
         setIsSearching(false);
-        dispatch(setResetSearchAction());
+        dispatch(resetSearchAction());
       }, 500);
     }
     marvelInputDebounceFn();
@@ -127,7 +127,7 @@ const HeroesList = () => {
   const handleCardClick = (char: ICharacter) => {
     setSelectedHeroID(char.id);
     setAllowRedirect(true);
-    dispatch(setResetSearchAction())
+    dispatch(resetSearchAction())
   };
 
   const renderHeroesContainer = () => (

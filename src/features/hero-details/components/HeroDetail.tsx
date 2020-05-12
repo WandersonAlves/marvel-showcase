@@ -1,6 +1,6 @@
 import { ICharacter } from "../../../interfaces/CharacterInterface";
 import { IEditedHero } from "../../../interfaces/ReduxInterface";
-import { setRemoveEditHeroAction } from "../../../store/hero-detail/actions";
+import { removeEditHeroAction } from "../../../store/hero-detail/actions";
 import { useDispatch } from "react-redux";
 import Card from "../../../components/Card";
 import DetailsGroup from "./DetailsGroup";
@@ -42,7 +42,7 @@ const HeroDetail = ({ char, editedChar, charImage, heroID }: IHeroDetailProps) =
 
   const resetEdit = () => {
     if (editedChar) {
-      dispatch(setRemoveEditHeroAction(heroID));
+      dispatch(removeEditHeroAction(heroID));
     }
   };
 

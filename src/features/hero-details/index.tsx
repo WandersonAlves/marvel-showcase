@@ -1,8 +1,8 @@
+import { editHeroAction } from '../../store/hero-detail/actions';
 import { GetCharactersFactory, GetNullableCharacterFactory } from '../../factories/CharacterFactory';
 import { getMarvelCharacter } from '../../api/services/Characters';
 import { ICharacter } from '../../interfaces/CharacterInterface';
 import { IReduxStore } from '../../interfaces/ReduxInterface';
-import { setEditHeroAction } from '../../store/hero-detail/actions';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import HeroDetail from './components/HeroDetail';
@@ -48,7 +48,7 @@ const HeroDetails: FunctionComponent<HeroDetailsProps> = () => {
     fetchCharacterFromStoreOrAPI();
     if (!editedChar) {
       dispatch(
-        setEditHeroAction({
+        editHeroAction({
           id: Number(heroID),
           customDescription: '',
           customName: '',

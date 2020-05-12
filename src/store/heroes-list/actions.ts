@@ -14,12 +14,12 @@ export const setHeroesAction = (heroesResponse: IAPIResponse<ICharacter>) => ({
   heroesResponse,
 });
 
-export const setAddMoreHeroesAction = (heroesResponse: IAPIResponse<ICharacter>) => ({
+export const addMoreHeroesAction = (heroesResponse: IAPIResponse<ICharacter>) => ({
   type: SET_ADD_MORE_HEROES,
   heroesResponse,
 });
 
-export const setAddMoreSearchHeroesAction = (heroesResponse: IAPIResponse<ICharacter>) => ({
+export const addMoreSearchHeroesAction = (heroesResponse: IAPIResponse<ICharacter>) => ({
   type: SET_ADD_MORE_SEARCH_HEROES,
   heroesResponse,
 });
@@ -29,7 +29,7 @@ export const setSearchHeroesAction = (heroesResponse: IAPIResponse<ICharacter>) 
   heroesResponse,
 });
 
-export const setResetSearchAction = () => ({ type: SET_RESET_SEARCH });
+export const resetSearchAction = () => ({ type: SET_RESET_SEARCH });
 
 export const setIsLoadingAction = (isLoading = true) => ({ type: SET_ISLOADING, isLoading });
 export const setHasErrorOnLoadingAction = (hasError = true) => ({ type: SET_ISLOADING, hasError });

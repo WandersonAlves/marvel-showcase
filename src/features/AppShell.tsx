@@ -1,4 +1,4 @@
-import { setBatchEditHeroAction } from '../store/hero-detail/actions';
+import { batchEditHeroAction } from '../store/hero-detail/actions';
 import { Switch, Route, BrowserRouter, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import ContainerShell from '../components/ContainerShell';
@@ -16,7 +16,7 @@ const AppShell = () => {
   useEffect(() => {
     const savedEditedHeroes = localStorage.getItem('edited-heroes');
     if (savedEditedHeroes) {
-      dispatch(setBatchEditHeroAction(JSON.parse(savedEditedHeroes).heroes));
+      dispatch(batchEditHeroAction(JSON.parse(savedEditedHeroes).heroes));
     }
   }, [])
 
