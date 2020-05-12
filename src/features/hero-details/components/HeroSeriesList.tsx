@@ -33,12 +33,8 @@ const HeroSeriesList = ({ heroID }: IHeroSeriesListProps) => {
     }
   };
 
-  const handleScroll = (e: any) => {
-    const docElement = document.documentElement;
-    const bottom = docElement.scrollHeight - docElement.scrollTop === docElement.clientHeight;
-    if (bottom) {
-      fetchCharacterSeries(seriesList.length);
-    }
+  const handleScrollFromParent = () => {
+    fetchCharacterSeries(seriesList.length);
   };
 
   useEffect(() => {
@@ -54,7 +50,7 @@ const HeroSeriesList = ({ heroID }: IHeroSeriesListProps) => {
   );
 
   return (
-    <FlexColumn onScroll={handleScroll}>
+    <FlexColumn>
       <Separator />
       <FlexRow alignItems justifyItems>
         <h1>Series List</h1>

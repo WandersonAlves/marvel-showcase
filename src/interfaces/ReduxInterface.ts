@@ -17,7 +17,7 @@ export interface IEditedHeroesListState {
 }
 
 export interface IEditedHero {
-  id: number;
+  id?: number;
   isGoodGuy?: boolean;
   isBadGuy?: boolean;
   customDescription?: string;
