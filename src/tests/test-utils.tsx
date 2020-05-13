@@ -1,41 +1,44 @@
-import { MemoryRouter } from 'react-router-dom';
+import { createMemoryHistory, MemoryHistory } from 'history';
 import { Provider } from 'react-redux';
-import { render, act } from '@testing-library/react';
+import { render, act, RenderResult } from '@testing-library/react';
+import { Router } from 'react-router-dom';
 import { Store } from 'redux';
 import CreatedStore from '../store';
 import React from 'react';
 
-interface ITestProviderProps {
-  store: Store;
-  children: JSX.Element;
+interface SetupProps {
+  route?: string;
+  history?: MemoryHistory;
 }
 
-const TestProvider = ({ store, children }: ITestProviderProps) => <Provider store={store}>{children}</Provider>;
+interface SetupPromiseReturn extends RenderResult {
+  store: Store;
+  history: MemoryHistory;
+}
 
-export const TestRender = (Component: JSX.Element, { store, ...otherOpts }: { store: Store }) => {
-  return render(<TestProvider store={store}>{Component}</TestProvider>, { wrapper: MemoryRouter, ...otherOpts });
-};
-
-export const Setup = (Component: JSX.Element): Promise<{ store: Store, getByTestId: any }> => {
-  const store = makeTestStore();
-  return new Promise(resolve => {
-    act(() => {
-      const { getByTestId } = TestRender(Component, { store });
-      resolve({ getByTestId, store });
-    });
-  });
-};
-
-export const makeTestStore = (opts = {}) => {
+const makeTestStore = (opts = {}) => {
   const store = CreatedStore;
   const origDispatch = store.dispatch;
   store.dispatch = jest.fn(origDispatch);
   return store;
 };
 
-export const wait = (ms: number) =>
-  new Promise(resolve => {
-    setTimeout(() => {
-      resolve();
-    }, ms);
+export const Setup = (
+  Component: JSX.Element,
+  { route = '/', history = createMemoryHistory({ initialEntries: [route] }) }: SetupProps = {},
+): Promise<SetupPromiseReturn> => {
+  const store = makeTestStore();
+  return new Promise(resolve => {
+    act(() => {
+      resolve({
+        ...render(
+          <Provider store={store}>
+            <Router history={history}>{Component}</Router>
+          </Provider>,
+        ),
+        store,
+        history,
+      });
+    });
   });
+};

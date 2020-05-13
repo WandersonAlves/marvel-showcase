@@ -1,13 +1,15 @@
 import { act } from 'react-dom/test-utils';
 import { getMarvelCharacters } from '../api/services/Characters';
 import { Setup } from './test-utils';
-import { waitForElement, fireEvent } from '@testing-library/react';
+import { waitForElement, fireEvent, cleanup } from '@testing-library/react';
 import fetchCharMock from './mocks/fetchChar.json';
 import fetchCharNoResults from './mocks/fetchCharNoResults.json';
 import HeroesList from '../features/heroes-list';
 import React from 'react';
 
 jest.mock('../api/services/Characters.ts');
+
+afterEach(cleanup);
 
 describe('Heroes List test suite', () => {
   beforeEach(() => {
